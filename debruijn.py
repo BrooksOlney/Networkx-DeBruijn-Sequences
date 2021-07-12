@@ -81,14 +81,15 @@ class DeBruijnGraph:
             Generates a list of indices (memory addresses) from a given De Bruijn sequence.
         """
 
-        return [int(sequence[i:i+k], 2) for i in range(0, len(sequence) - k + 1)]
+        return [int(sequence[i:i+k], 2) for i in range(0, len(sequence) - k)]
 
 
 if __name__ == "__main__":
-    n = 16
+    n = 5
     dbg = DeBruijnGraph(n)
     s = time()
-    seqs = dbg.gen_multiple_sequences(1)
+    seqs = dbg.gen_multiple_sequences(100)
+    inds = dbg.gen_indices_from_sequence(seqs[0], n)
     print(time() - s)
     with open(f"{n}-bit_sequences.txt", 'w') as dbfile:
         for seq in seqs:
